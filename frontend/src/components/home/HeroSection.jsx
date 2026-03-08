@@ -1,8 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, PlayCircle } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const HeroSection = () => {
+    const navigate = useNavigate();
+
     return (
         <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-[#0A5330]">
             {/* Background Image with Overlay */}
@@ -43,7 +46,10 @@ const HeroSection = () => {
                         transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
                         className="flex flex-col sm:flex-row gap-4 justify-center items-center"
                     >
-                        <button className="group relative px-8 py-4 bg-white text-green-900 rounded-full font-bold text-lg shadow-lg shadow-green-900/20 hover:shadow-xl hover:scale-105 transition-all duration-300 overflow-hidden">
+                        <button
+                            onClick={() => navigate('/login')}
+                            className="group relative px-8 py-4 bg-white text-green-900 rounded-full font-bold text-lg shadow-lg shadow-green-900/20 hover:shadow-xl hover:scale-105 transition-all duration-300 overflow-hidden"
+                        >
                             <span className="relative z-10 flex items-center gap-2">
                                 Get Started <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                             </span>
