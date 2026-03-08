@@ -109,12 +109,20 @@ app.post('/api/seed-db', async (req, res) => {
         }
 
         const passwordHash = await bcrypt.hash('password123', 10);
-        await User.create({
-            name: 'Admin User',
-            email: 'admin@nit.edu.in',
-            password: passwordHash,
-            role: 'admin',
-            avatar: ''
+
+        await User.findOrCreate({
+            where: { email: 'admin@nit.edu.in' },
+            defaults: { name: 'Admin User', email: 'admin@nit.edu.in', password: passwordHash, role: 'admin', avatar: '' }
+        });
+
+        await User.findOrCreate({
+            where: { email: 'teacher@nit.edu.in' },
+            defaults: { name: 'Teacher User', email: 'teacher@nit.edu.in', password: passwordHash, role: 'teacher', avatar: '' }
+        });
+
+        await User.findOrCreate({
+            where: { email: 'student@nit.edu.in' },
+            defaults: { name: 'Student User', email: 'student@nit.edu.in', password: passwordHash, role: 'student', avatar: '' }
         });
 
         res.status(200).json({ message: "Database seeded successfully with admin account! Password: password123" });
